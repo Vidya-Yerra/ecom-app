@@ -22,6 +22,12 @@ def authView(request):
         form = UserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
 
+
+def productsView(request):
+    products = Product.objects.all()
+    return render(request,"products.html",{"products":products})
+
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

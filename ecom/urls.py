@@ -28,6 +28,6 @@ router.register('reviews',views.ReviewViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ecom/',include(router.urls)),
-    path("",include(("ecomapp.urls","ecomapp"),"ecomapp"))    
+    # path('ecom/',include(router.urls)),
+    path("ecom/",include("ecomapp.urls"))    
 ]

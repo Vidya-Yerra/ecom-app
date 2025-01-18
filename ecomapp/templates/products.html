@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <div>
+        <h1>Product List</h1>
+        <div>
+            {% for product in products%}
+            <div>
+                <p>Product Name: {{product.name}}</p>
+                <p>Product Price: Rs.{{product.price}}</p>
+                <p>Product Description: {{product.description}}</p>
+                <form>
+                    <button>
+                        Review
+                    </button>
+                </form>
+                <hr>
+            </div>
+            {% endfor%}
+        </div>
+         
+    </div>
+</body>
+</html>
