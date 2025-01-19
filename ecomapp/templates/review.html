@@ -7,21 +7,23 @@
 </head>
 <body>
     <div>
-        <h1>Product List</h1>
+        <h1>Product Review</h1>
         <div>
-            {% for product in products%}
             <div>
                 <p>Product Name: {{product.name}}</p>
                 <p>Product Price: Rs.{{product.price}}</p>
                 <p>Product Description: {{product.description}}</p>
-                <form action="{% url 'reviewview' product_id=product.id %}">
+                <form method="POST">
+                     {% csrf_token %}
+                    <textarea name="review_product"> </textarea>
+                    
                     <button type="submit">
-                        Review
+                        Submit Review
                     </button>
                 </form>
                 <hr>
             </div>
-            {% endfor%}
+            
         </div>
          
     </div>
