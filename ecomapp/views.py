@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from ecomapp.models import Product,Review
 from ecomapp.serializers import ProductSerializer,ReviewSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets,generics,filters
 from django.shortcuts import redirect
 import datetime
 
@@ -29,7 +29,6 @@ def productsView(request):
     return render(request,"products.html",{"products":products})
 
 def reviewView(request,product_id):
-    print("In review view function")
     product = Product.objects.get(id=product_id)
     if request.method == 'POST':
         user=request.user
@@ -40,8 +39,7 @@ def reviewView(request,product_id):
         return redirect('/ecom/products/')
     else:
         return render(request,"review.html",{"product":product})
-
-
+    
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -50,4 +48,12 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+class ProductReviewListView(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        product_id = self.kwargs['product_id']
+        return Review.objects.filter(product_id=product_id)
+
 
